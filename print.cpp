@@ -1,5 +1,7 @@
 #include "print.h"
+#include <iostream>
 
+// Function implementations
 std::wstring CardRankToString(CardRank rank) {
     switch (rank) {
     case CardRank::Ace:   return L"Ace";
@@ -29,7 +31,6 @@ std::wstring CardSuitToString(CardSuit suit) {
     }
 }
 
-// handRank to string
 std::wstring handRankToString(HandRank rank) {
     switch (rank) {
     case HandRank::StraightFlush: return L"Straight Flush";

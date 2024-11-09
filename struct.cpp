@@ -1,11 +1,13 @@
+
 #include "struct.h"
+#include <cstdlib>
 
-void Deck::shuffle()
-{
-    std::srand(std::time(nullptr));
-    std::random_shuffle(m_deck.begin(), m_deck.end());
-}
+// Card constructors
+Card::Card() : Suit(CardSuit::Clubs), Rank(CardRank::Two) {}
 
+Card::Card(CardRank rank, CardSuit suit) : Suit(suit), Rank(rank) {}
+
+// Deck function implementations
 std::vector<Card> Deck::createStandardDeck()
 {
     std::vector<Card> standardDeck;
@@ -13,26 +15,31 @@ std::vector<Card> Deck::createStandardDeck()
     {
         for (CardRank rank : {CardRank::Two, CardRank::Three, CardRank::Four, CardRank::Five, CardRank::Six, CardRank::Seven, CardRank::Eight, CardRank::Nine, CardRank::Ten, CardRank::Jack, CardRank::Queen, CardRank::King, CardRank::Ace})
         {
-            standardDeck.push_back(Card(rank, suit));
+            standardDeck.emplace_back(rank, suit);
         }
     }
     return standardDeck;
 }
 
-Deck::Deck() : m_deck(createStandardDeck())
+void Deck::shuffle()
+{
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    std::random_shuffle(deck.begin(), deck.end());
+}
+
+Deck::Deck() : deck(createStandardDeck())
 {
     shuffle();
 }
 
 Card Deck::draw()
 {
-    if (m_deck.empty())
+    if (deck.empty())
     {
-        m_deck = createStandardDeck();
-        shuffle();
+        std::cout << "Hết bài rồi";
     }
 
-    Card drawnCard = m_deck.back();
-    m_deck.pop_back();
+    Card drawnCard = deck.back();
+    deck.pop_back();
     return drawnCard;
 }

@@ -8,15 +8,12 @@
 #include "print.h"
 #include "player.h"
 
-int main()
-{
+int main() {
     /// @brief Set console mode to support wide characters
     _setmode(_fileno(stdout), _O_U16TEXT);
 
     unsigned int numPlayer;
     std::wstring userInput;
-
-    Deck playingDeck;
 
     /// @brief Input and validate the number of players
     do
@@ -48,12 +45,14 @@ int main()
             player.loadStats(player.name + L"_stats.txt");
         }
 
+        Deck deck;
+
         /// @brief Deal 5 cards to each player's hand
         for (int i = 0; i < 5; ++i)
         {
             for (auto& player : players)
             {
-                player.hand.cards[i] = playingDeck.draw();
+                player.hand.cards[i] = deck.draw();
             }
         }
 
@@ -105,7 +104,7 @@ int main()
             std::wcout << L"It's a tie between " << winners.size() << L" players: ";
             for (unsigned int i = 0; i < winners.size(); ++i)
             {
-                std::wcout << winners[i].name << ", ";
+                std::wcout << winners[i].name << std::endl;
             }
         }
 

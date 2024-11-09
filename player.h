@@ -5,6 +5,7 @@
 #include <string>
 #include "struct.h"
 
+// Function prototypes
 struct Player
 {
     std::wstring name;
@@ -15,18 +16,15 @@ struct Player
     int favoriteStrategyCount = 0;
     Hand hand;
 
-    /// @brief Constructor
+    // Constructors
     Player();
     Player(const std::wstring& playerName);
 
+    // Member functions
     void updateStats(bool won, HandRank strategy);
-
     void updateWinRate();
-
     void updateFavoriteStrategy(HandRank strategy);
-
     void saveStats(const std::wstring& filename);
-
     void loadStats(const std::wstring& filename);
 };
 

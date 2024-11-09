@@ -4,13 +4,10 @@
 #include <string>
 #include "struct.h"
 
+// Function prototypes
 std::wstring CardRankToString(CardRank rank);
-
 std::wstring CardSuitToString(CardSuit suit);
-
-// handRank to string
 std::wstring handRankToString(HandRank rank);
-
 void PrintHand(const Hand& hand);
 
 #endif

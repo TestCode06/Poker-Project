@@ -1,9 +1,13 @@
+
 #include "player.h"
+#include <iostream>
 
-/// @brief Constructor
-Player::Player() : name(L"") {}
-Player::Player(const std::wstring& playerName) : name(playerName) {}
+// Constructors
+Player::Player() : name(L""), wins(0), losses(0), winRate(0.0), favoriteStrategy(HandRank::HighCard), favoriteStrategyCount(0) {}
 
+Player::Player(const std::wstring& playerName) : name(playerName), wins(0), losses(0), winRate(0.0), favoriteStrategy(HandRank::HighCard), favoriteStrategyCount(0) {}
+
+// Member function implementations
 void Player::updateStats(bool won, HandRank strategy)
 {
     if (won)

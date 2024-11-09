@@ -4,9 +4,9 @@
 
 #include <vector>        // Để sử dụng std::vector
 #include <iostream>      // Để sử dụng std::cout
-#include "struct.h"      
 #include <algorithm>     // Để sử dụng std::random_shuffle (hoặc std::shuffle)
 #include <ctime>         // Để sử dụng std::time
+#include <string>
 
 enum class CardSuit {
     Hearts, Diamonds, Spades, Clubs
@@ -31,21 +31,21 @@ public:
     /// @brief The rank of the card
     CardRank Rank = CardRank::Two;
 
-    Card() = default;
-    Card(CardRank rank, CardSuit suit) : Suit(suit), Rank(rank) {}
+    Card();
+    Card(CardRank rank, CardSuit suit);
 };
 
-class Deck
+struct Deck
 {
 private:
-    std::vector<Card> m_deck;
+    std::vector<Card> deck;
 
     static std::vector<Card> createStandardDeck();
+
 public:
     void shuffle();
 
     Deck();
-
     Card draw();
 };
 
@@ -54,4 +54,4 @@ struct Hand {
     HandRank handPlayer;
 };
 
-#endif 
+#endif // STRUCTPOKER_H
