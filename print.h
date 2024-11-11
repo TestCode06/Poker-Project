@@ -5,9 +5,9 @@
 #include "struct.h"
 
 // Function prototypes
-std::wstring CardRankToString(CardRank rank);
-std::wstring CardSuitToString(CardSuit suit);
-std::wstring handRankToString(HandRank rank);
+std::string CardRankToString(CardRank rank);
+std::string CardSuitToString(CardSuit suit);
+std::string handRankToString(HandRank rank);
 void PrintHand(const Hand& hand);
 
 #endif

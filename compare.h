@@ -18,4 +18,7 @@ double EvaluateHand(Hand* handPlayer);
 HandRank getBestHandRank(Hand* hand);
 void CompareHand(Hand* player1, Hand* player2);
 
+// Helper function prototype
+double calculateScore(int multiplier, const std::vector<int>& ranks);
+
 #endif
