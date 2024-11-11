@@ -2,52 +2,60 @@
 #include <iostream>
 
 // Function implementations
-std::wstring CardRankToString(CardRank rank) {
-    switch (rank) {
-    case CardRank::Ace:   return L"Ace";
-    case CardRank::Two:   return L"2";
-    case CardRank::Three: return L"3";
-    case CardRank::Four:  return L"4";
-    case CardRank::Five:  return L"5";
-    case CardRank::Six:   return L"6";
-    case CardRank::Seven: return L"7";
-    case CardRank::Eight: return L"8";
-    case CardRank::Nine:  return L"9";
-    case CardRank::Ten:   return L"10";
-    case CardRank::Jack:  return L"J";
-    case CardRank::Queen: return L"Q";
-    case CardRank::King:  return L"K";
-    default:             return L"Unknown";
+
+// Static arrays for mapping
+const std::string CardRankStrings[] = {
+    "Unknown", // 0
+    "Unknown", // 1
+    "2", "3", "4", "5", "6", "7", "8", "9", "10",
+    "Jack", "Queen", "King", "Ace"
+};
+
+const std::string CardSuitStrings[] = {
+    "Hearts", "Diamonds", "Spades", "Clubs"
+};
+
+const std::string HandRankStrings[] = {
+    "Unknown", // 0
+    "High Card", "Pair", "Two Pair", "Three of a Kind", "Straight",
+    "Flush", "Full House", "Four of a Kind", "Straight Flush"
+};
+
+std::string CardRankToString(CardRank rank)
+{
+    int rankValue = static_cast<int>(rank);
+    if (rankValue >= 2 && rankValue <= 14)
+    {
+        return CardRankStrings[rankValue];
     }
+    return "Unknown";
 }
 
-std::wstring CardSuitToString(CardSuit suit) {
-    switch (suit) {
-    case CardSuit::Hearts: return L"\u2665"; // ♥
-    case CardSuit::Diamonds: return L"\u2666"; // ♦
-    case CardSuit::Spades: return L"\u2660"; // ♠
-    case CardSuit::Clubs: return L"\u2663"; // ♣
-    default: return L"Unknown";
+std::string CardSuitToString(CardSuit suit)
+{
+    int suitValue = static_cast<int>(suit);
+    if (suitValue >= 0 && suitValue <= 3)
+    {
+        return CardSuitStrings[suitValue];
     }
+    return "Unknown";
 }
 
-std::wstring handRankToString(HandRank rank) {
-    switch (rank) {
-    case HandRank::StraightFlush: return L"Straight Flush";
-    case HandRank::Quad: return L"Quad";
-    case HandRank::FullHouse: return L"Full House";
-    case HandRank::Flush: return L"Flush";
-    case HandRank::Straight: return L"Straight";
-    case HandRank::Set: return L"Set";
-    case HandRank::TwoPair: return L"Two Pair";
-    case HandRank::Pair: return L"One Pair";
-    default: return L"High Card"; // Sử dụng L"" cho chuỗi rộng
+std::string handRankToString(HandRank rank)
+{
+    int rankValue = static_cast<int>(rank);
+    if (rankValue >= 1 && rankValue <= 9)
+    {
+        return HandRankStrings[rankValue];
     }
+    return "Unknown";
 }
 
-void PrintHand(const Hand& hand) {
-    for (const auto& card : hand.cards) {
-        std::wcout << L"Card: " << CardRankToString(card.Rank) << L" "
+void PrintHand(const Hand& hand)
+{
+    for (const auto& card : hand.cards)
+    {
+        std::cout << "Card: " << CardRankToString(card.Rank) << " of "
             << CardSuitToString(card.Suit) << std::endl;
     }
 }

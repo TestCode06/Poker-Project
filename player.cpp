@@ -1,11 +1,26 @@
-
 #include "player.h"
 #include <iostream>
 
 // Constructors
-Player::Player() : name(L""), wins(0), losses(0), winRate(0.0), favoriteStrategy(HandRank::HighCard), favoriteStrategyCount(0) {}
+Player::Player()
+{
+    name = "";
+    wins = 0;
+    losses = 0;
+    winRate = 0.0;
+    favoriteStrategy = HandRank::HighCard;
+    favoriteStrategyCount = 0;
+}
 
-Player::Player(const std::wstring& playerName) : name(playerName), wins(0), losses(0), winRate(0.0), favoriteStrategy(HandRank::HighCard), favoriteStrategyCount(0) {}
+Player::Player(const std::string& playerName)
+{
+    name = playerName;
+    wins = 0;
+    losses = 0;
+    winRate = 0.0;
+    favoriteStrategy = HandRank::HighCard;
+    favoriteStrategyCount = 0;
+}
 
 // Member function implementations
 void Player::updateStats(bool won, HandRank strategy)
@@ -44,24 +59,27 @@ void Player::updateFavoriteStrategy(HandRank strategy)
     }
 }
 
-void Player::saveStats(const std::wstring& filename)
+void Player::saveStats(const std::string& filename)
 {
-    std::wofstream file(filename.c_str());
+    std::string fullFilename = filename + ".txt";
+    std::ofstream file(fullFilename);
     if (file.is_open()) {
-        file << name << L"\n" << wins << L"\n" << losses << L"\n" << winRate << L"\n" << static_cast<int>(favoriteStrategy) << L"\n";
+        file << name << "\n" << wins << "\n" << losses << "\n" << winRate << "\n" << static_cast<int>(favoriteStrategy) << "\n";
         file.close();
     }
     else {
-        std::wcerr << L"Error opening file for saving stats!" << std::endl;
+        std::cerr << "Error opening file for saving stats!" << std::endl;
     }
 }
 
-void Player::loadStats(const std::wstring& filename)
+void Player::loadStats(const std::string& filename)
 {
-    std::wifstream file(filename.c_str());
+    std::string fullFilename = filename + ".txt";
+    std::ifstream file(fullFilename);
     if (file.is_open())
     {
-        file >> name >> wins >> losses >> winRate;
+        std::getline(file, name);
+        file >> wins >> losses >> winRate;
         int strategy;
         file >> strategy;
         favoriteStrategy = static_cast<HandRank>(strategy);
@@ -69,6 +87,6 @@ void Player::loadStats(const std::wstring& filename)
     }
     else
     {
-        std::wcerr << L"Error opening file for loading stats!" << std::endl;
+        std::cerr << "Error opening file for loading stats!" << std::endl;
     }
 }

@@ -1,8 +1,6 @@
-
 #include "struct.h"
 #include <cstdlib>
 
-// Card constructors
 Card::Card() : Suit(CardSuit::Clubs), Rank(CardRank::Two) {}
 
 Card::Card(CardRank rank, CardSuit suit) : Suit(suit), Rank(rank) {}
@@ -27,8 +25,9 @@ void Deck::shuffle()
     std::random_shuffle(deck.begin(), deck.end());
 }
 
-Deck::Deck() : deck(createStandardDeck())
+Deck::Deck()
 {
+    deck = createStandardDeck();
     shuffle();
 }
 
@@ -36,7 +35,7 @@ Card Deck::draw()
 {
     if (deck.empty())
     {
-        std::cout << "Hết bài rồi";
+        std::cout << "No more cards in deck!";  // Changed from wide string
     }
 
     Card drawnCard = deck.back();
